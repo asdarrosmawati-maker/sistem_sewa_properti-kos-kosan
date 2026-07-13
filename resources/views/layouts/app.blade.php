@@ -323,6 +323,13 @@
                         <span>Payment</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('facility.*') ? '' : 'collapsed' }}"
+                        href="{{ route('facility.index') }}">
+                        <i class='bx bx-list-check'></i>
+                        <span>Facility</span>
+                    </a>
+                </li>
             @endif
 
 
