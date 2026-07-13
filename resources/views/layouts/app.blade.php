@@ -338,6 +338,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('maintenance.*') ? '' : 'collapsed' }}"
+                        href="{{ route('maintenance.index') }}">
+                        <i class='bx bx-wrench'></i>
+                        <span>Maintenance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('review.*') ? '' : 'collapsed' }}"
                         href="{{ route('review.index') }}">
                         <i class='bx bx-star'></i>

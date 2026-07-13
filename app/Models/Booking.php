@@ -27,4 +27,9 @@ class Booking extends Model
     {
         return $this->hasOne(Review::class);
     }
+
+    public function maintenanceRequests()
+    {
+        return $this->hasMany(MaintenanceRequest::class);
+    }
 }

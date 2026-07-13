@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             FacilitySeeder::class,
             ReviewSeeder::class,
             GallerySeeder::class,
+            MaintenanceRequestSeeder::class,
         ]);
     }
 }

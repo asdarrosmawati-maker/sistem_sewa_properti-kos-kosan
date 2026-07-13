@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/facility', \App\Http\Controllers\FacilityController::class);
     Route::resource('/review', \App\Http\Controllers\ReviewController::class);
     Route::resource('/gallery', \App\Http\Controllers\GalleryController::class);
+    Route::resource('/maintenance', \App\Http\Controllers\MaintenanceRequestController::class);
 
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::put('/setting/{setting}/update', [SettingController::class, 'update'])->name('setting.update');
