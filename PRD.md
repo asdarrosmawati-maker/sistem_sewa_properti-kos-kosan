@@ -3,7 +3,7 @@
 **Role:** Senior Product Manager & Tech Lead
 **Date:** 13 Juli 2026
 **Status:** Draft / Proposed
-**Version:** 1.0
+**Version:** 1.2
 
 ---
 
@@ -72,14 +72,29 @@ Aplikasi ini terdiri dari tabel-tabel inti berikut:
    - Menyimpan data bangunan/kos-kosan. Berelasi *One-to-Many* dari tabel `users` (Satu pemilik bisa punya banyak properti).
    - Atribut penting: `id`, `user_id` (Pemilik), `name`, `address`, `description`.
 3. **`rooms` (Kamar):**
-   - Menyimpan rincian kamar yang ada di dalam sebuah properti. Berelasi *One-to-Many* dari tabel `properties` (Satu properti memiliki banyak kamar).
+   - Menyimpan rincian kamar. Berelasi *One-to-Many* dari tabel `properties`.
    - Atribut penting: `id`, `property_id`, `room_number`, `price_per_month`, `status` (available, occupied, maintenance).
 4. **`bookings` (Pemesanan/Penyewaan):**
-   - Mencatat transaksi sewa antara penyewa dan kamar. Berelasi dari `users` (Penyewa) dan `rooms`.
+   - Mencatat transaksi sewa. Berelasi dari `users` (Penyewa) dan `rooms`.
    - Atribut penting: `id`, `user_id` (Penyewa), `room_id`, `start_date`, `end_date`, `total_price`, `status` (pending, approved, rejected, active, completed).
 5. **`payments` (Pembayaran):**
-   - Mencatat riwayat pembayaran bulanan/tahunan untuk suatu `booking`. Berelasi *One-to-Many* dari `bookings`.
+   - Mencatat riwayat pembayaran bulanan/tahunan. Berelasi *One-to-Many* dari `bookings`.
    - Atribut penting: `id`, `booking_id`, `amount`, `payment_date`, `proof_of_payment`, `status` (pending, verified).
+6. **`facilities` (Fasilitas):**
+   - Menyimpan daftar fasilitas yang disediakan (misal: AC, WiFi, Kamar Mandi Dalam).
+   - Atribut penting: `id`, `property_id`, `name`, `icon`, `description`.
+7. **`reviews` (Ulasan):**
+   - Mencatat ulasan dan rating dari penyewa setelah masa sewa selesai.
+   - Atribut penting: `id`, `booking_id`, `user_id`, `rating` (1-5), `comment`.
+8. **`galleries` (Galeri Properti/Kamar):**
+   - Menyimpan foto-foto properti atau kamar untuk melengkapi katalog.
+   - Atribut penting: `id`, `property_id`, `room_id` (opsional), `image_path`, `caption`.
+9. **`maintenance_requests` (Pengaduan/Perbaikan):**
+   - Menyimpan keluhan/permintaan perbaikan fasilitas (misal: AC rusak) dari tenant.
+   - Atribut penting: `id`, `booking_id`, `user_id`, `issue_description`, `status` (pending, in_progress, resolved).
+10. **`expenses` (Pengeluaran Operasional):**
+   - Menyimpan pencatatan pengeluaran kos-kosan oleh Owner (misal: bayar listrik, air, gaji penjaga).
+   - Atribut penting: `id`, `property_id`, `description`, `amount`, `expense_date`.
 
 ### 4.2. Visualisasi Entity Relationship Diagram (ERD)
 
@@ -111,7 +126,28 @@ erDiagram
         string room_number
         decimal price_per_month
         string status "Available, Occupied"
-        datetime created_at
+    }
+    
+    FACILITIES {
+        bigint id PK
+        bigint property_id FK
+        string name
+        string icon
+    }
+    
+    GALLERIES {
+        bigint id PK
+        bigint property_id FK
+        bigint room_id FK "nullable"
+        string image_path
+    }
+    
+    EXPENSES {
+        bigint id PK
+        bigint property_id FK
+        string description
+        decimal amount
+        date expense_date
     }
     
     BOOKINGS {
@@ -132,13 +168,40 @@ erDiagram
         string proof_of_payment
         string status "Pending, Verified"
     }
+    
+    REVIEWS {
+        bigint id PK
+        bigint booking_id FK
+        bigint user_id FK
+        int rating
+        text comment
+    }
+    
+    MAINTENANCE_REQUESTS {
+        bigint id PK
+        bigint booking_id FK
+        bigint user_id FK
+        text issue_description
+        string status "Pending, Resolved"
+    }
 
     %% Relasi (Relationships)
-    USERS ||--o{ PROPERTIES : "owns (Pemilik)"
-    USERS ||--o{ BOOKINGS : "makes (Penyewa)"
+    USERS ||--o{ PROPERTIES : "owns"
+    USERS ||--o{ BOOKINGS : "makes"
+    USERS ||--o{ REVIEWS : "writes"
+    USERS ||--o{ MAINTENANCE_REQUESTS : "reports"
+    
     PROPERTIES ||--o{ ROOMS : "contains"
+    PROPERTIES ||--o{ FACILITIES : "has"
+    PROPERTIES ||--o{ GALLERIES : "has photos"
+    PROPERTIES ||--o{ EXPENSES : "incurs"
+    
     ROOMS ||--o{ BOOKINGS : "is rented in"
+    ROOMS ||--o{ GALLERIES : "has photos"
+    
     BOOKINGS ||--o{ PAYMENTS : "has"
+    BOOKINGS ||--o| REVIEWS : "receives"
+    BOOKINGS ||--o{ MAINTENANCE_REQUESTS : "generates"
 ```
 
 ---
