@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             FacilitySeeder::class,
             ReviewSeeder::class,
+            GallerySeeder::class,
         ]);
     }
 }
