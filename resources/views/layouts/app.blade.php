@@ -302,6 +302,13 @@
                         <span>Property</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('room.*') ? '' : 'collapsed' }}"
+                        href="{{ route('room.index') }}">
+                        <i class='bx bx-bed'></i>
+                        <span>Room</span>
+                    </a>
+                </li>
             @endif
 
 
