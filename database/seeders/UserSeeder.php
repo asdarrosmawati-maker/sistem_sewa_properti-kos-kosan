@@ -20,9 +20,19 @@ class UserSeeder extends Seeder
                 'role' => 'Superadmin',
             ],
             [
-                'name' => 'Joh Doe',
+                'name' => 'Super Administrator',
                 'email' => 'admin@gmail.com',
                 'role' => 'Admin',
+            ],
+            [
+                'name' => 'Bapak Kos',
+                'email' => 'owner@gmail.com',
+                'role' => 'Owner',
+            ],
+            [
+                'name' => 'Budi Penyewa',
+                'email' => 'tenant@gmail.com',
+                'role' => 'Tenant',
             ],
         ];
 
