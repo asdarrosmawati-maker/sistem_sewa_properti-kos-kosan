@@ -345,6 +345,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('expense.*') ? '' : 'collapsed' }}"
+                        href="{{ route('expense.index') }}">
+                        <i class='bx bx-money-withdraw'></i>
+                        <span>Expenses</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('review.*') ? '' : 'collapsed' }}"
                         href="{{ route('review.index') }}">
                         <i class='bx bx-star'></i>
