@@ -10,7 +10,7 @@
     <title>{{ $setting->app_name }} | {{ $title }}</title>
     <meta content="{{ $setting->description }}" name="description">
     <meta content="{{ $setting->keywords }}" name="keywords">
-    <meta content="Tamus Tahir" name="author">
+    <meta content="Agil Yaiz" name="author">
 
     <!-- Favicons -->
     <link href="{{ $setting->logo ? asset('storage/' . $setting->logo) : asset('niceadmin/img/laravel.png') }}"
@@ -356,6 +356,35 @@
                         href="{{ route('review.index') }}">
                         <i class='bx bx-star'></i>
                         <span>Review</span>
+                    </a>
+                </li>
+            @elseif (Auth::user()->role == 'Tenant')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('payment.create') ? '' : 'collapsed' }}"
+                        href="{{ route('payment.create') }}">
+                        <i class='bx bx-money'></i>
+                        <span>Tagihan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('announcement.*') ? '' : 'collapsed' }}"
+                        href="{{ route('announcement.index') }}">
+                        <i class='bx bx-bell'></i>
+                        <span>Pengumuman</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('maintenance.*') ? '' : 'collapsed' }}"
+                        href="{{ route('maintenance.index') }}">
+                        <i class='bx bx-wrench'></i>
+                        <span>Pengajuan Komplain</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('payment.index') ? '' : 'collapsed' }}"
+                        href="{{ route('payment.index') }}">
+                        <i class='bx bx-history'></i>
+                        <span>Riwayat Pembayaran</span>
                     </a>
                 </li>
             @endif

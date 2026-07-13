@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/show', [DashboardController::class, 'show'])->name('dashboard.show');
     Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
     Route::put('/dashboard/update', [DashboardController::class, 'update'])->name('dashboard.update');
+    Route::get('/dashboard/announcement', [DashboardController::class, 'announcement'])->name('announcement.index');
 
     Route::resource('/user', UserController::class)->middleware('role:Superadmin');
     Route::resource('/property', \App\Http\Controllers\PropertyController::class);

@@ -11,6 +11,33 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+
+        if ($user->role === 'Tenant') {
+            // Get active or pending booking for the tenant
+            $booking = \App\Models\Booking::where('user_id', $user->id)
+                ->whereIn('status', ['Active', 'Pending'])
+                ->latest()
+                ->first();
+
+            $latestPayment = null;
+            if ($booking) {
+                // Get payment for current month
+                $latestPayment = \App\Models\Payment::where('booking_id', $booking->id)
+                    ->whereMonth('payment_date', date('m'))
+                    ->whereYear('payment_date', date('Y'))
+                    ->latest()
+                    ->first();
+            }
+
+            return view('dashboard.index', [
+                'title' => 'Dashboard',
+                'booking' => $booking,
+                'latestPayment' => $latestPayment,
+            ]);
+        }
+
+        // Logic for Superadmin & Admin
         $totalUsers = \App\Models\User::count();
         $superadminCount = \App\Models\User::where('role', 'Superadmin')->count();
         $adminCount = \App\Models\User::where('role', 'Admin')->count();
@@ -83,5 +110,12 @@ class DashboardController extends Controller
             DB::rollBack();
             return to_route('dashboard.edit')->withError('Gagal mengubah data: ' . $e->getMessage());
         }
+    }
+
+    public function announcement()
+    {
+        return view('dashboard.announcement', [
+            'title' => 'Pengumuman Kos'
+        ]);
     }
 }

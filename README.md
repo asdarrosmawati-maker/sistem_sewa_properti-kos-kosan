@@ -43,7 +43,7 @@ Setelah menjalankan seeder, Anda dapat login menggunakan akun berikut:
 
 | Nama        | Email             | Password   | Role       |
 | ----------- | ----------------- | ---------- | ---------- |
-| Tamus Tahir | `tamus@gmail.com` | `password` | Superadmin |
+| Agil Yaiz   | `agil@gmail.com`  | `password` | Superadmin |
 | Joh Doe     | `admin@gmail.com` | `password` | Admin      |
 
 ## 🛠️ Stack Teknologi
