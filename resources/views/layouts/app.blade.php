@@ -330,6 +330,13 @@
                         <span>Facility</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('review.*') ? '' : 'collapsed' }}"
+                        href="{{ route('review.index') }}">
+                        <i class='bx bx-star'></i>
+                        <span>Review</span>
+                    </a>
+                </li>
             @endif
 
 
