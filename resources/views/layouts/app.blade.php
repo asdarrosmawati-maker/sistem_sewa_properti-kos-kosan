@@ -294,6 +294,16 @@
                 </li>
             @endif
 
+            @if (Auth::user()->role != 'Tenant')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('property.*') ? '' : 'collapsed' }}"
+                        href="{{ route('property.index') }}">
+                        <i class='bx bx-building-house'></i>
+                        <span>Property</span>
+                    </a>
+                </li>
+            @endif
+
 
         </ul>
 
