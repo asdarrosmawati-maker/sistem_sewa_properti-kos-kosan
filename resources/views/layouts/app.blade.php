@@ -316,6 +316,13 @@
                         <span>Booking</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('payment.*') ? '' : 'collapsed' }}"
+                        href="{{ route('payment.index') }}">
+                        <i class='bx bx-money'></i>
+                        <span>Payment</span>
+                    </a>
+                </li>
             @endif
 
 
