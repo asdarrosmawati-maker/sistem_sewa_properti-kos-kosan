@@ -43,63 +43,64 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        .font-script {
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+        }
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800 antialiased selection:bg-brand-500 selection:text-white">
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-sky-500 selection:text-white">
 
     <div class="min-h-screen flex">
-        <!-- Left Side: Visual / Branding (Hidden on mobile) -->
-        <div class="hidden lg:flex lg:w-1/2 relative bg-brand-900 overflow-hidden items-center justify-center">
-            <!-- Abstract Background Image -->
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
-                class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" alt="Background">
-
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-br from-brand-600/80 to-brand-900/90"></div>
-
+        <!-- Left Side: Visual / Branding (Sky Blue Background) -->
+        <div class="hidden lg:flex lg:w-1/2 relative bg-[#87CEEB] overflow-hidden items-center justify-center flex-col">
+            
             <!-- Branding Content -->
-            <div class="relative z-10 p-12 text-center text-white max-w-lg">
-                <div class="mb-8 flex justify-center">
+            <div class="relative z-10 p-12 text-center text-gray-900 flex flex-col items-center justify-center h-full">
+                
+                <div class="mb-12">
+                    <h2 class="font-script text-5xl mb-2 text-gray-900" style="transform: rotate(-5deg);">Koa-kosan</h2>
+                    <h1 class="text-7xl font-extrabold tracking-tight text-white/90 drop-shadow-sm uppercase">MVP</h1>
+                </div>
+
+                <div class="mb-8 mt-4 rounded-full bg-white p-2 shadow-xl inline-block">
                     @if ($setting->logo)
-                        <img src="{{ asset('storage/' . $setting->logo) }}" alt="Logo" class="h-24 drop-shadow-2xl">
+                        <img src="{{ asset('storage/' . $setting->logo) }}" alt="Logo" class="h-32 w-32 object-cover rounded-full">
                     @else
-                        <div
-                            class="w-24 h-24 bg-white rounded-3xl flex items-center justify-center text-brand-600 font-bold text-4xl shadow-2xl">
-                            {{ substr($setting->app_name ?? 'A', 0, 1) }}
+                        <div class="w-32 h-32 bg-gray-900 rounded-full flex items-center justify-center text-[#87CEEB] font-bold text-5xl shadow-inner border-4 border-gray-900">
+                            {{ substr($setting->app_name ?? 'K', 0, 1) }}
                         </div>
                     @endif
                 </div>
-                <h1 class="text-4xl font-extrabold tracking-tight mb-4">{{ $setting->app_name ?? 'Admin Panel' }}</h1>
-                <p class="text-brand-100 text-lg font-light leading-relaxed">
-                    {{ $setting->description ?? 'Welcome to our modern administrative dashboard. Log in to access your workspace and manage your system seamlessly.' }}
-                </p>
+
+                <h3 class="text-3xl font-bold text-gray-900 tracking-wide mt-4">{{ $setting->app_name ?? 'Kos Management' }}</h3>
             </div>
         </div>
 
         <!-- Right Side: Login Form -->
-        <div
-            class="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 md:p-16 bg-white shadow-2xl lg:shadow-none z-10 relative">
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 md:p-16 relative bg-white lg:bg-transparent">
+            
+            <!-- Grayscale background image for right side (visible on large screens) -->
+            <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=2069&auto=format&fit=crop"
+                 class="hidden lg:block absolute inset-0 w-full h-full object-cover grayscale opacity-20" alt="Background">
 
             <!-- Mobile Logo (Visible only on small screens) -->
-            <div class="absolute top-8 left-8 lg:hidden flex items-center gap-3">
+            <div class="absolute top-8 left-8 lg:hidden flex items-center gap-3 z-20">
                 @if ($setting->logo)
                     <img src="{{ asset('storage/' . $setting->logo) }}" alt="Logo" class="h-8">
                 @else
-                    <div
-                        class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                        {{ substr($setting->app_name ?? 'A', 0, 1) }}
+                    <div class="w-8 h-8 bg-sky-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                        {{ substr($setting->app_name ?? 'K', 0, 1) }}
                     </div>
                 @endif
                 <span class="font-bold text-gray-800">{{ $setting->app_name }}</span>
             </div>
 
-            <div class="w-full max-w-md mt-10 lg:mt-0">
+            <div class="w-full max-w-md mt-10 lg:mt-0 relative z-20 bg-white/90 lg:bg-white/80 lg:backdrop-blur-md p-8 rounded-3xl shadow-2xl lg:shadow-xl border border-gray-100">
 
-                <div class="mb-10 text-left">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">{{ $setting->login_title ?? 'Welcome Back' }} 👋
-                    </h2>
-                    <p class="text-gray-500">Please enter your credentials to continue.</p>
+                <div class="mb-8 text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">{{ $setting->login_title ?? 'Welcome Back' }} 👋</h2>
+                    <p class="text-gray-500">Sign in to your account</p>
                 </div>
 
                 <form method="POST" action="{{ route('login.authenticate') }}" class="space-y-6">
