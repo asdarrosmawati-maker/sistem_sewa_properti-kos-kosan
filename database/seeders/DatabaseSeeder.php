@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             PropertySeeder::class,
             RoomSeeder::class,
+            BookingSeeder::class,
         ]);
     }
 }
