@@ -9,24 +9,22 @@
 
 ## 1. Executive Summary & Product Vision
 **Visi Produk:** Menjadi platform digital terpercaya yang menyederhanakan proses pencarian, penyewaan, dan pengelolaan properti (khususnya kos-kosan). 
-Aplikasi ini bertujuan untuk menjembatani pemilik kos yang ingin mengelola properti mereka secara efisien dengan pencari kos yang membutuhkan transparansi harga, fasilitas, dan kemudahan transaksi.
+Aplikasi ini bertujuan untuk menjembatani admin/pengelola kos yang ingin mengelola properti mereka secara efisien dengan pencari kos yang membutuhkan transparansi harga, fasilitas, dan kemudahan transaksi.
 
 **Tujuan Bisnis (Objectives):**
-- Mengurangi waktu dan usaha pemilik kos dalam mencatat pembayaran bulanan dan mengelola ketersediaan kamar.
+- Mengurangi waktu dan usaha pengelola kos dalam mencatat pembayaran bulanan dan mengelola ketersediaan kamar.
 - Memberikan pengalaman pencarian kos yang mulus bagi calon penyewa.
 - Mendemokratisasi digitalisasi bagi pengusaha kos-kosan skala kecil hingga menengah.
 
 ---
 
 ## 2. User Personas & Target Audience
-Aplikasi ini dirancang untuk melayani 3 jenis pengguna (User Roles):
+Aplikasi ini dirancang untuk melayani 2 jenis pengguna utama (User Roles):
 
 1. **Penyewa (Tenant / Calon Penyewa):**
    - **Kebutuhan:** Mencari kos berdasarkan lokasi dan harga, melihat detail fasilitas, memesan kamar, dan melacak riwayat pembayaran bulanan.
-2. **Pemilik Properti (Landlord / Mitra):**
-   - **Kebutuhan:** Menambahkan data properti/kos, mengelola status kamar (kosong/terisi), menyetujui pemesanan, dan mencatat/melihat laporan pendapatan.
-3. **Administrator Sistem (Superadmin):**
-   - **Kebutuhan:** Mengawasi aktivitas platform, mengelola pengguna (suspend/aktivasi), menangani komplain, dan mengelola pengaturan web (kategori properti, dll).
+2. **Administrator Sistem (Admin / Pengelola Kos):**
+   - **Kebutuhan:** Menambahkan data properti/kos, mengelola ketersediaan kamar, menyetujui pemesanan, melihat laporan pendapatan, menangani komplain, serta mengawasi aktivitas platform secara keseluruhan.
 
 ---
 
@@ -34,10 +32,10 @@ Aplikasi ini dirancang untuk melayani 3 jenis pengguna (User Roles):
 Berikut adalah fitur-fitur utama untuk Minimum Viable Product (MVP):
 
 ### 3.1. Authentication & Authorization
-- Registrasi dan login multi-role (Admin, Pemilik, Penyewa).
+- Registrasi dan login multi-role (Admin, Penyewa).
 - Manajemen profil pengguna.
 
-### 3.2. Property & Room Management (Khusus Pemilik & Admin)
+### 3.2. Property & Room Management (Khusus Admin)
 - Create, Read, Update, Delete (CRUD) Data Kos/Properti (Nama, Deskripsi, Alamat, Fasilitas Umum).
 - CRUD Data Kamar (Tipe kamar, Harga per bulan/tahun, Ketersediaan, Foto, Fasilitas Kamar).
 
@@ -47,13 +45,13 @@ Berikut adalah fitur-fitur utama untuk Minimum Viable Product (MVP):
 
 ### 3.4. Booking & Transaction (Sewa Menyewa)
 - **Pemesanan:** Penyewa dapat melakukan *booking* kamar yang tersedia.
-- **Konfirmasi:** Pemilik dapat menerima atau menolak pesanan.
+- **Konfirmasi:** Admin dapat menerima atau menolak pesanan.
 - **Tagihan (Invoice):** Sistem menghasilkan tagihan bulanan secara otomatis.
 - **Pembayaran:** Penyewa dapat mengunggah bukti bayar (manual transfer) atau melalui *Payment Gateway* (opsional untuk MVP).
 - **Status Transaksi:** Pending, Menunggu Verifikasi, Lunas, Dibatalkan.
 
 ### 3.5. Dashboard & Reporting
-- **Pemilik:** Grafik pendapatan bulanan, jumlah kamar terisi vs kosong, pengingat tagihan jatuh tempo.
+- **Admin:** Grafik pendapatan bulanan, jumlah kamar terisi vs kosong, pengingat tagihan jatuh tempo.
 - **Penyewa:** Riwayat sewa, tagihan yang belum dibayar.
 
 ---
@@ -66,11 +64,11 @@ Bagian ini menjelaskan struktur data fundamental yang mendukung aplikasi. Arsite
 Aplikasi ini terdiri dari tabel-tabel inti berikut:
 
 1. **`users` (Pengguna):**
-   - Menyimpan seluruh data pengguna (Superadmin, Pemilik, Penyewa).
+   - Menyimpan seluruh data pengguna (Admin, Tenant).
    - Atribut penting: `id`, `name`, `email`, `password`, `role`.
 2. **`properties` (Properti/Kos):**
-   - Menyimpan data bangunan/kos-kosan. Berelasi *One-to-Many* dari tabel `users` (Satu pemilik bisa punya banyak properti).
-   - Atribut penting: `id`, `user_id` (Pemilik), `name`, `address`, `description`.
+   - Menyimpan data bangunan/kos-kosan. Berelasi *One-to-Many* dari tabel `users` (Satu admin bisa mengelola banyak properti).
+   - Atribut penting: `id`, `user_id` (Admin/Pembuat), `name`, `address`, `description`.
 3. **`rooms` (Kamar):**
    - Menyimpan rincian kamar. Berelasi *One-to-Many* dari tabel `properties`.
    - Atribut penting: `id`, `property_id`, `room_number`, `price_per_month`, `status` (available, occupied, maintenance).
@@ -93,7 +91,7 @@ Aplikasi ini terdiri dari tabel-tabel inti berikut:
    - Menyimpan keluhan/permintaan perbaikan fasilitas (misal: AC rusak) dari tenant.
    - Atribut penting: `id`, `booking_id`, `user_id`, `issue_description`, `status` (pending, in_progress, resolved).
 10. **`expenses` (Pengeluaran Operasional):**
-   - Menyimpan pencatatan pengeluaran kos-kosan oleh Owner (misal: bayar listrik, air, gaji penjaga).
+   - Menyimpan pencatatan pengeluaran kos-kosan oleh Admin (misal: bayar listrik, air, gaji penjaga).
    - Atribut penting: `id`, `property_id`, `description`, `amount`, `expense_date`.
 
 ### 4.2. Visualisasi Entity Relationship Diagram (ERD)
@@ -107,13 +105,13 @@ erDiagram
         string name
         string email
         string password
-        string role "Admin, Owner, Tenant"
+        string role "Admin, Tenant"
         datetime created_at
     }
     
     PROPERTI {
         bigint id PK
-        bigint user_id FK "Owner ID"
+        bigint user_id FK "Admin ID"
         string name
         text description
         string address
@@ -186,7 +184,7 @@ erDiagram
     }
 
     %% Relasi (Relationships)
-    PENGGUNA ||--o{ PROPERTI : "owns"
+    PENGGUNA ||--o{ PROPERTI : "manages"
     PENGGUNA ||--o{ PENYEWAAN : "makes"
     PENGGUNA ||--o{ ULASAN : "writes"
     PENGGUNA ||--o{ PERMINTAAN_PERBAIKAN : "reports"

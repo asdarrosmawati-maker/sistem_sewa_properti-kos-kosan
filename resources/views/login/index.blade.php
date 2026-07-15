@@ -59,8 +59,7 @@
             <div class="relative z-10 p-12 text-center text-gray-900 flex flex-col items-center justify-center h-full">
                 
                 <div class="mb-12">
-                    <h2 class="font-script text-5xl mb-2 text-gray-900" style="transform: rotate(-5deg);">Koa-kosan</h2>
-                    <h1 class="text-7xl font-extrabold tracking-tight text-white/90 drop-shadow-sm uppercase">MVP</h1>
+                    <h3 class="font-script text-5xl mb-2 text-gray-900" style="transform: rotate(-5deg);">AGIL YAIZ ERLANGGA</h3>
                 </div>
 
                 <div class="mb-8 mt-4 rounded-full bg-white p-2 shadow-xl inline-block">

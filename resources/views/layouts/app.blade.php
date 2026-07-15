@@ -280,7 +280,7 @@
                 <a class="nav-link {{ request()->routeIs('setting.*') ? '' : 'collapsed' }}"
                     href="{{ route('setting.index') }}">
                     <i class='bx bx-cog'></i>
-                    <span>Pengaturan</span>
+                    <span>Setting</span>
                 </a>
             </li>
 
@@ -289,7 +289,7 @@
                     <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
                         href="{{ route('user.index') }}">
                         <i class='bx bx-user-pin'></i>
-                        <span>Pengguna</span>
+                        <span>User</span>
                     </a>
                 </li>
             @endif
