@@ -10,20 +10,6 @@
             <div class="row g-3 mb-3">
                 <div class="col-md-12">
                     
-                    <div class="mb-3">
-                        <label for="user_id" class="form-label required">Pemilik Properti</label>
-                        <select class="form-select select2-default @error('user_id') is-invalid @enderror" id="user_id" name="user_id" required>
-                            <option value="">Pilih Pemilik</option>
-                            @foreach($owners as $owner)
-                                <option value="{{ $owner->id }}" @selected(old('user_id') == $owner->id)>{{ $owner->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('user_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
 
                     <div class="mb-3">
                         <label for="name" class="form-label required">Nama Properti</label>

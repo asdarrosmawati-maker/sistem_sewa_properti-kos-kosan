@@ -74,7 +74,7 @@
                             <option value="">Pilih Role</option>
                             <option value="Superadmin" @selected(old('role', $user->role) == 'Superadmin')>Superadmin</option>
                             <option value="Admin" @selected(old('role', $user->role) == 'Admin')>Admin</option>
-                            <option value="Owner" @selected(old('role', $user->role) == 'Owner')>Owner</option>
+
                             <option value="Tenant" @selected(old('role', $user->role) == 'Tenant')>Tenant</option>
                         </select>
                         @error('role')

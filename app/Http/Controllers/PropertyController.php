@@ -36,13 +36,10 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'user_id' => 'required|exists:users,id',
             'name' => 'required',
             'address' => 'required',
             'description' => 'nullable',
         ], [
-            'user_id.required' => 'Pemilik wajib dipilih',
-            'user_id.exists' => 'Pemilik tidak ditemukan',
             'name.required' => 'Nama properti wajib diisi',
             'address.required' => 'Alamat properti wajib diisi',
         ]);
@@ -50,6 +47,7 @@ class PropertyController extends Controller
         DB::beginTransaction();
 
         try {
+            $validate['user_id'] = auth()->id();
             Property::create($validate);
 
             DB::commit();
@@ -89,13 +87,10 @@ class PropertyController extends Controller
     public function update(Request $request, Property $property)
     {
         $validate = $request->validate([
-            'user_id' => 'required|exists:users,id',
             'name' => 'required',
             'address' => 'required',
             'description' => 'nullable',
         ], [
-            'user_id.required' => 'Pemilik wajib dipilih',
-            'user_id.exists' => 'Pemilik tidak ditemukan',
             'name.required' => 'Nama properti wajib diisi',
             'address.required' => 'Alamat properti wajib diisi',
         ]);

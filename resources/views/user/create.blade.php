@@ -73,7 +73,7 @@
                             <option value="">Pilih Role</option>
                             <option value="Superadmin" @selected(old('role') == 'Superadmin')>Superadmin</option>
                             <option value="Admin" @selected(old('role') == 'Admin')>Admin</option>
-                            <option value="Owner" @selected(old('role') == 'Owner')>Owner</option>
+
                             <option value="Tenant" @selected(old('role') == 'Tenant')>Tenant</option>
                         </select>
                         @error('role')

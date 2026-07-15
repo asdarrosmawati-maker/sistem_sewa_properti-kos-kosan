@@ -14,7 +14,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama Properti</th>
-                        <th scope="col">Pemilik</th>
+
                         <th scope="col">Alamat</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $property->name }}</td>
-                            <td>{{ $property->user->name ?? '-' }}</td>
+
                             <td>{{ $property->address }}</td>
                             <td>
                                 <button type="button" class="btn btn-info btn-sm btn-detail"
