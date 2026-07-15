@@ -15,7 +15,7 @@ class SettingController extends Controller
     public function index()
     {
         return view('setting.index', [
-            'title' => 'Setting',
+            'title' => 'Pengaturan',
             'setting' => Setting::first(),
         ]);
     }

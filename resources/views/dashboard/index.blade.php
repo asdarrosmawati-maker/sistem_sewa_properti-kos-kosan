@@ -118,124 +118,161 @@
             </div>
         </div>
 
-        <!-- Quick Actions for Tenant -->
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-header bg-white border-bottom">
-                <h5 class="mb-0 fw-bold">
-                    <i class='bx bx-rocket me-2 text-primary'></i>
-                    Aksi Cepat
-                </h5>
+        <div class="row g-4 mb-4">
+            <div class="col-md-8">
+                <!-- Payment History Chart for Tenant -->
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="mb-0 fw-bold">
+                            <i class='bx bx-bar-chart-alt-2 me-2 text-primary'></i>
+                            Riwayat Pembayaran (6 Bulan Terakhir)
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="tenantPaymentChart"></div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="row g-3 mt-2">
-                    <div class="col-md-3">
-                        <a href="{{ route('payment.create') }}" class="text-decoration-none">
-                            <div class="card border border-primary border-opacity-25 h-100 hover-shadow">
-                                <div class="card-body text-center mt-4">
-                                    <i class='bx bx-wallet fs-1 text-primary mb-2'></i>
-                                    <h6 class="mb-0">Bayar Tagihan</h6>
-                                </div>
-                            </div>
-                        </a>
+            <div class="col-md-4">
+                <!-- Quick Actions for Tenant -->
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="mb-0 fw-bold">
+                            <i class='bx bx-rocket me-2 text-primary'></i>
+                            Aksi Cepat
+                        </h5>
                     </div>
-                    <div class="col-md-3">
-                        <a href="{{ $booking ? route('booking.show', $booking) : '#' }}" class="text-decoration-none">
-                            <div class="card border border-success border-opacity-25 h-100 hover-shadow">
-                                <div class="card-body text-center mt-4">
-                                    <i class='bx bx-file fs-1 text-success mb-2'></i>
-                                    <h6 class=" mb-0">Kontrak Sewa</h6>
-                                </div>
+                    <div class="card-body">
+                        <div class="row g-3 mt-2">
+                            <div class="col-12">
+                                <a href="{{ route('payment.create') }}" class="text-decoration-none">
+                                    <div class="card border border-primary border-opacity-25 hover-shadow">
+                                        <div class="card-body d-flex align-items-center p-3">
+                                            <i class='bx bx-wallet fs-2 text-primary me-3'></i>
+                                            <h6 class="mb-0 text-dark">Bayar Tagihan</h6>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{{ route('maintenance.create') }}" class="text-decoration-none">
-                            <div class="card border border-info border-opacity-25 h-100 hover-shadow">
-                                <div class="card-body text-center mt-4">
-                                    <i class='bx bx-wrench fs-1 text-info mb-2'></i>
-                                    <h6 class=" mb-0">Komplain/Perbaikan</h6>
-                                </div>
+                            <div class="col-12">
+                                <a href="{{ $booking ? route('booking.show', $booking) : '#' }}" class="text-decoration-none">
+                                    <div class="card border border-success border-opacity-25 hover-shadow">
+                                        <div class="card-body d-flex align-items-center p-3">
+                                            <i class='bx bx-file fs-2 text-success me-3'></i>
+                                            <h6 class=" mb-0 text-dark">Kontrak Sewa</h6>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{{ route('payment.index') }}" class="text-decoration-none">
-                            <div class="card border border-warning border-opacity-25 h-100 hover-shadow">
-                                <div class="card-body text-center mt-4">
-                                    <i class='bx bx-history fs-1 text-warning mb-2'></i>
-                                    <h6 class=" mb-0">Riwayat Pembayaran</h6>
-                                </div>
+                            <div class="col-12">
+                                <a href="{{ route('maintenance.create') }}" class="text-decoration-none">
+                                    <div class="card border border-info border-opacity-25 hover-shadow">
+                                        <div class="card-body d-flex align-items-center p-3">
+                                            <i class='bx bx-wrench fs-2 text-info me-3'></i>
+                                            <h6 class=" mb-0 text-dark">Komplain/Perbaikan</h6>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     @else
-        <!-- Statistics Cards -->
+        <!-- Statistics Cards for Admin/Superadmin -->
         <div class="row g-4 mb-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <p class="text-muted mb-1 small">Total Users</p>
-                                <h2 class="fw-bold mb-0">{{ $totalUsers }}</h2>
+                                <p class="text-muted mb-1 small">Total Properti</p>
+                                <h2 class="fw-bold mb-0">{{ $totalProperties }}</h2>
                             </div>
                             <div class="bg-primary bg-opacity-10 rounded-circle p-3">
-                                <i class='bx bx-user fs-2 text-primary'></i>
+                                <i class='bx bx-building-house fs-2 text-primary'></i>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer bg-primary bg-opacity-10 border-0 py-2">
-                        <small class="text-primary fw-semibold">
-                            <i class='bx bx-trending-up me-1'></i>
-                            All registered users
-                        </small>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <p class="text-muted mb-1 small">Superadmin</p>
-                                <h2 class="fw-bold mb-0">{{ $superadminCount }}</h2>
-                            </div>
-                            <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                                <i class='bx bx-shield fs-2 text-success'></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-success bg-opacity-10 border-0 py-2">
-                        <small class="text-success fw-semibold">
-                            <i class='bx bx-check-circle me-1'></i>
-                            Full access users
-                        </small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <p class="text-muted mb-1 small">Admin</p>
-                                <h2 class="fw-bold mb-0">{{ $adminCount }}</h2>
+                                <p class="text-muted mb-1 small">Total Kamar</p>
+                                <h2 class="fw-bold mb-0">{{ $totalRooms }}</h2>
                             </div>
                             <div class="bg-info bg-opacity-10 rounded-circle p-3">
-                                <i class='bx bx-user-check fs-2 text-info'></i>
+                                <i class='bx bx-bed fs-2 text-info'></i>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer bg-info bg-opacity-10 border-0 py-2">
-                        <small class="text-info fw-semibold">
-                            <i class='bx bx-user-circle me-1'></i>
-                            Standard access users
-                        </small>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <p class="text-muted mb-1 small">Kamar Terisi</p>
+                                <h2 class="fw-bold mb-0">{{ $occupiedRooms }}</h2>
+                            </div>
+                            <div class="bg-success bg-opacity-10 rounded-circle p-3">
+                                <i class='bx bx-key fs-2 text-success'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <p class="text-muted mb-1 small">Total Pendapatan</p>
+                                <h4 class="fw-bold mb-0">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h4>
+                            </div>
+                            <div class="bg-warning bg-opacity-10 rounded-circle p-3">
+                                <i class='bx bx-money fs-2 text-warning'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="mb-0 fw-bold">
+                            <i class='bx bx-line-chart me-2 text-primary'></i>
+                            Tren Pendapatan (6 Bulan Terakhir)
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="revenueChart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="mb-0 fw-bold">
+                            <i class='bx bx-pie-chart-alt-2 me-2 text-primary'></i>
+                            Status Kamar
+                        </h5>
+                    </div>
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                        <div id="roomStatusChart"></div>
                     </div>
                 </div>
             </div>
@@ -246,47 +283,47 @@
             <div class="card-header bg-white border-bottom">
                 <h5 class="mb-0 fw-bold">
                     <i class='bx bx-rocket me-2 text-primary'></i>
-                    Quick Actions
+                    Aksi Cepat
                 </h5>
             </div>
             <div class="card-body">
                 <div class="row g-3 mt-2">
                     <div class="col-md-3">
-                        <a href="{{ route('user.index') }}" class="text-decoration-none">
+                        <a href="{{ route('property.index') }}" class="text-decoration-none">
                             <div class="card border border-primary border-opacity-25 h-100 hover-shadow">
                                 <div class="card-body text-center mt-4">
-                                    <i class='bx bx-user-plus fs-1 text-primary mb-2'></i>
-                                    <h6 class="mb-0">Manage Users</h6>
+                                    <i class='bx bx-building-house fs-1 text-primary mb-2'></i>
+                                    <h6 class="mb-0 text-dark">Kelola Properti</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ route('payment.index') }}" class="text-decoration-none">
+                            <div class="card border border-success border-opacity-25 h-100 hover-shadow">
+                                <div class="card-body text-center mt-4">
+                                    <i class='bx bx-money fs-1 text-success mb-2'></i>
+                                    <h6 class=" mb-0 text-dark">Verifikasi Pembayaran</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ route('booking.index') }}" class="text-decoration-none">
+                            <div class="card border border-info border-opacity-25 h-100 hover-shadow">
+                                <div class="card-body text-center mt-4">
+                                    <i class='bx bx-book-content fs-1 text-info mb-2'></i>
+                                    <h6 class=" mb-0 text-dark">Kelola Sewa</h6>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-3">
                         <a href="{{ route('setting.index') }}" class="text-decoration-none">
-                            <div class="card border border-success border-opacity-25 h-100 hover-shadow">
-                                <div class="card-body text-center mt-4">
-                                    <i class='bx bx-cog fs-1 text-success mb-2'></i>
-                                    <h6 class=" mb-0">Settings</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{{ route('dashboard.show') }}" class="text-decoration-none">
-                            <div class="card border border-info border-opacity-25 h-100 hover-shadow">
-                                <div class="card-body text-center mt-4">
-                                    <i class='bx bx-user-circle fs-1 text-info mb-2'></i>
-                                    <h6 class=" mb-0">My Profile</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{{ route('dashboard.edit') }}" class="text-decoration-none">
                             <div class="card border border-warning border-opacity-25 h-100 hover-shadow">
                                 <div class="card-body text-center mt-4">
-                                    <i class='bx bx-edit fs-1 text-warning mb-2'></i>
-                                    <h6 class=" mb-0">Edit Profile</h6>
+                                    <i class='bx bx-cog fs-1 text-warning mb-2'></i>
+                                    <h6 class=" mb-0 text-dark">Pengaturan Sistem</h6>
                                 </div>
                             </div>
                         </a>
@@ -296,68 +333,133 @@
         </div>
     @endif
 
-    <!-- System Information -->
-    <div class="row g-3">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-white border-bottom">
-                    <h6 class="mb-0 fw-bold">
-                        <i class='bx bx-info-circle me-2 text-primary'></i>
-                        System Information
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled mb-0 pt-4">
-                        <li class="mb-2">
-                            <i class='bx bx-check-circle text-success me-2'></i>
-                            <strong>Laravel Version:</strong> {{ app()->version() }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-check-circle text-success me-2'></i>
-                            <strong>PHP Version:</strong> {{ PHP_VERSION }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-check-circle text-success me-2'></i>
-                            <strong>Environment:</strong> {{ config('app.env') }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0 pt-4">
-                <div class="card-header bg-white border-bottom">
-                    <h6 class="mb-0 fw-bold">
-                        <i class='bx bx-user me-2 text-primary'></i>
-                        Your Account
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-2">
-                            <i class='bx bx-envelope text-primary me-2'></i>
-                            <strong>Email:</strong> {{ Auth::user()->email }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-calendar text-primary me-2'></i>
-                            <strong>Member Since:</strong> {{ Auth::user()->created_at->format('d M Y') }}
-                        </li>
-                        <li class="mb-2">
-                            <i class='bx bx-time text-primary me-2'></i>
-                            <strong>Last Updated:</strong> {{ Auth::user()->updated_at->diffForHumans() }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    @push('modals')
-    @endpush
-
     @push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            @if (Auth::user()->role === 'Tenant')
+                @if(isset($chartLabels) && isset($chartData) && count($chartData) > 0)
+                new ApexCharts(document.querySelector("#tenantPaymentChart"), {
+                    series: [{
+                        name: 'Pembayaran',
+                        data: {!! json_encode($chartData) !!}
+                    }],
+                    chart: {
+                        height: 300,
+                        type: 'bar',
+                        toolbar: {
+                            show: false
+                        }
+                    },
+                    colors: ['#4154f1'],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 4,
+                            horizontal: false,
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    xaxis: {
+                        categories: {!! json_encode($chartLabels) !!},
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return "Rp " + new Intl.NumberFormat('id-ID').format(value);
+                            }
+                        }
+                    }
+                }).render();
+                @else
+                document.querySelector("#tenantPaymentChart").innerHTML = "<p class='text-muted text-center mt-4'>Belum ada riwayat pembayaran</p>";
+                @endif
+            @else
+                // Revenue Trend Chart
+                new ApexCharts(document.querySelector("#revenueChart"), {
+                    series: [{
+                        name: 'Pendapatan',
+                        data: {!! json_encode($revenueData ?? []) !!}
+                    }],
+                    chart: {
+                        height: 300,
+                        type: 'area',
+                        toolbar: {
+                            show: false
+                        }
+                    },
+                    colors: ['#2eca6a'],
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        width: 2
+                    },
+                    xaxis: {
+                        categories: {!! json_encode($revenueLabels ?? []) !!},
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return "Rp " + new Intl.NumberFormat('id-ID').format(value);
+                            }
+                        }
+                    }
+                }).render();
+
+                // Room Status Chart
+                new ApexCharts(document.querySelector("#roomStatusChart"), {
+                    series: [{{ $occupiedRooms ?? 0 }}, {{ $availableRooms ?? 0 }}],
+                    chart: {
+                        height: 300,
+                        type: 'donut',
+                    },
+                    labels: ['Terisi', 'Tersedia'],
+                    colors: ['#ff771d', '#4154f1'],
+                    plotOptions: {
+                        pie: {
+                            donut: {
+                                size: '70%',
+                                labels: {
+                                    show: true,
+                                    name: {
+                                        show: true,
+                                    },
+                                    value: {
+                                        show: true,
+                                    },
+                                    total: {
+                                        show: true,
+                                        showAlways: true,
+                                        label: 'Total Kamar',
+                                        formatter: function (w) {
+                                            return {{ $totalRooms ?? 0 }}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }).render();
+            @endif
+        });
+    </script>
     @endpush
 
 </x-app>

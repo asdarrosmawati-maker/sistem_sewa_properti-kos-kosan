@@ -40,8 +40,8 @@
     <style>
         :root {
             /* ====== UBAH WARNA TEMA DI SINI ====== */
-            --theme-bg: #000080;
-            --theme-hover: #020260;
+            --theme-bg: oklch(37.3% 0.034 259.733);
+            --theme-hover: oklch(30% 0.034 259.733);
             /* warna lebih gelap untuk efek hover */
             --theme-text: #ffffff;
             --main-bg: #eeeeee;
@@ -280,7 +280,7 @@
                 <a class="nav-link {{ request()->routeIs('setting.*') ? '' : 'collapsed' }}"
                     href="{{ route('setting.index') }}">
                     <i class='bx bx-cog'></i>
-                    <span>Setting</span>
+                    <span>Pengaturan</span>
                 </a>
             </li>
 
@@ -289,7 +289,7 @@
                     <a class="nav-link {{ request()->routeIs('user.*') ? '' : 'collapsed' }}"
                         href="{{ route('user.index') }}">
                         <i class='bx bx-user-pin'></i>
-                        <span>User</span>
+                        <span>Pengguna</span>
                     </a>
                 </li>
             @endif
@@ -299,63 +299,63 @@
                     <a class="nav-link {{ request()->routeIs('property.*') ? '' : 'collapsed' }}"
                         href="{{ route('property.index') }}">
                         <i class='bx bx-building-house'></i>
-                        <span>Property</span>
+                        <span>Properti</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('room.*') ? '' : 'collapsed' }}"
                         href="{{ route('room.index') }}">
                         <i class='bx bx-bed'></i>
-                        <span>Room</span>
+                        <span>Kamar</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('booking.*') ? '' : 'collapsed' }}"
                         href="{{ route('booking.index') }}">
                         <i class='bx bx-book-content'></i>
-                        <span>Booking</span>
+                        <span>Penyewaan</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('payment.*') ? '' : 'collapsed' }}"
                         href="{{ route('payment.index') }}">
                         <i class='bx bx-money'></i>
-                        <span>Payment</span>
+                        <span>Pembayaran</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('facility.*') ? '' : 'collapsed' }}"
                         href="{{ route('facility.index') }}">
                         <i class='bx bx-list-check'></i>
-                        <span>Facility</span>
+                        <span>Fasilitas</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('gallery.*') ? '' : 'collapsed' }}"
                         href="{{ route('gallery.index') }}">
                         <i class='bx bx-images'></i>
-                        <span>Gallery</span>
+                        <span>Galeri</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('maintenance.*') ? '' : 'collapsed' }}"
                         href="{{ route('maintenance.index') }}">
                         <i class='bx bx-wrench'></i>
-                        <span>Maintenance</span>
+                        <span>Pemeliharaan</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('expense.*') ? '' : 'collapsed' }}"
                         href="{{ route('expense.index') }}">
                         <i class='bx bx-money-withdraw'></i>
-                        <span>Expenses</span>
+                        <span>Pengeluaran</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('review.*') ? '' : 'collapsed' }}"
                         href="{{ route('review.index') }}">
                         <i class='bx bx-star'></i>
-                        <span>Review</span>
+                        <span>Ulasan</span>
                     </a>
                 </li>
             @elseif (Auth::user()->role == 'Tenant')

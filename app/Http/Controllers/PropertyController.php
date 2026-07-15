@@ -14,7 +14,7 @@ class PropertyController extends Controller
     public function index()
     {
         return view('property.index', [
-            'title' => 'Property',
+            'title' => 'Properti',
             'properties' => Property::with('user')->latest()->get(),
         ]);
     }
@@ -25,7 +25,7 @@ class PropertyController extends Controller
     public function create()
     {
         return view('property.create', [
-            'title' => 'Create Property',
+            'title' => 'Tambah Properti',
             'owners' => \App\Models\User::where('role', 'Owner')->get(),
         ]);
     }
@@ -66,7 +66,7 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         return view('property.show', [
-            'title' => 'Detail Property',
+            'title' => 'Detail Properti',
             'property' => $property,
         ]);
     }
@@ -77,7 +77,7 @@ class PropertyController extends Controller
     public function edit(Property $property)
     {
         return view('property.edit', [
-            'title' => 'Edit Property',
+            'title' => 'Edit Properti',
             'property' => $property,
             'owners' => \App\Models\User::where('role', 'Owner')->get(),
         ]);

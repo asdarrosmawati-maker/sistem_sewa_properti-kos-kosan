@@ -30,30 +30,68 @@ class DashboardController extends Controller
                     ->first();
             }
 
+            // Get payment history for charts (Last 6 months)
+            $paymentHistory = \App\Models\Payment::whereHas('booking', function($q) use ($user) {
+                    $q->where('user_id', $user->id);
+                })
+                ->where('status', 'Verified')
+                ->latest('payment_date')
+                ->take(6)
+                ->get()
+                ->reverse()
+                ->values();
+
+            $chartLabels = $paymentHistory->map(function($payment) {
+                return \Carbon\Carbon::parse($payment->payment_date)->format('M Y');
+            })->toArray();
+            
+            $chartData = $paymentHistory->pluck('amount')->toArray();
+
             return view('dashboard.index', [
                 'title' => 'Dashboard',
                 'booking' => $booking,
                 'latestPayment' => $latestPayment,
+                'chartLabels' => $chartLabels,
+                'chartData' => $chartData
             ]);
         }
 
         // Logic for Superadmin & Admin
-        $totalUsers = \App\Models\User::count();
-        $superadminCount = \App\Models\User::where('role', 'Superadmin')->count();
-        $adminCount = \App\Models\User::where('role', 'Admin')->count();
+        $totalProperties = \App\Models\Property::count();
+        $totalRooms = \App\Models\Room::count();
+        $occupiedRooms = \App\Models\Booking::where('status', 'Active')->count();
+        $availableRooms = max(0, $totalRooms - $occupiedRooms); // simple approximation
+        
+        $totalRevenue = \App\Models\Payment::where('status', 'Verified')->sum('amount');
+        
+        // Revenue for the last 6 months
+        $revenueData = [];
+        $revenueLabels = [];
+        for ($i = 5; $i >= 0; $i--) {
+            $date = \Carbon\Carbon::now()->subMonths($i);
+            $revenueLabels[] = $date->format('M Y');
+            $revenueData[] = \App\Models\Payment::where('status', 'Verified')
+                ->whereMonth('payment_date', $date->month)
+                ->whereYear('payment_date', $date->year)
+                ->sum('amount');
+        }
 
         return view('dashboard.index', [
             'title' => 'Dashboard',
-            'totalUsers' => $totalUsers,
-            'superadminCount' => $superadminCount,
-            'adminCount' => $adminCount,
+            'totalProperties' => $totalProperties,
+            'totalRooms' => $totalRooms,
+            'occupiedRooms' => $occupiedRooms,
+            'availableRooms' => $availableRooms,
+            'totalRevenue' => $totalRevenue,
+            'revenueLabels' => $revenueLabels,
+            'revenueData' => $revenueData
         ]);
     }
 
     public function show()
     {
         return view('dashboard.show', [
-            'title' => 'My Profile',
+            'title' => 'Profil Saya',
             'user' => Auth::user()
         ]);
     }
@@ -61,7 +99,7 @@ class DashboardController extends Controller
     public function edit()
     {
         return view('dashboard.edit', [
-            'title' => 'Edit Profile',
+            'title' => 'Edit Profil',
             'user' => Auth::user()
         ]);
     }

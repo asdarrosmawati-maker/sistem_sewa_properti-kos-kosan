@@ -16,7 +16,7 @@ class PaymentController extends Controller
     public function index()
     {
         return view('payment.index', [
-            'title' => 'Payment',
+            'title' => 'Pembayaran',
             'payments' => Payment::with('booking.user')->latest()->get(),
         ]);
     }
@@ -27,7 +27,7 @@ class PaymentController extends Controller
     public function create()
     {
         return view('payment.create', [
-            'title' => 'Create Payment',
+            'title' => 'Tambah Pembayaran',
             'bookings' => Booking::with('user')->get(),
         ]);
     }
@@ -82,7 +82,7 @@ class PaymentController extends Controller
     public function show(Payment $payment)
     {
         return view('payment.show', [
-            'title' => 'Detail Payment',
+            'title' => 'Detail Pembayaran',
             'payment' => $payment->load('booking.user'),
         ]);
     }
@@ -93,7 +93,7 @@ class PaymentController extends Controller
     public function edit(Payment $payment)
     {
         return view('payment.edit', [
-            'title' => 'Edit Payment',
+            'title' => 'Edit Pembayaran',
             'payment' => $payment,
             'bookings' => Booking::with('user')->get(),
         ]);

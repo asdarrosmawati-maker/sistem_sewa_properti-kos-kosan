@@ -15,7 +15,7 @@ class RoomController extends Controller
     public function index()
     {
         return view('room.index', [
-            'title' => 'Room',
+            'title' => 'Kamar',
             'rooms' => Room::with('property')->latest()->get(),
         ]);
     }
@@ -26,7 +26,7 @@ class RoomController extends Controller
     public function create()
     {
         return view('room.create', [
-            'title' => 'Create Room',
+            'title' => 'Tambah Kamar',
             'properties' => Property::all(),
         ]);
     }
@@ -69,7 +69,7 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         return view('room.show', [
-            'title' => 'Detail Room',
+            'title' => 'Detail Kamar',
             'room' => $room,
         ]);
     }
@@ -80,7 +80,7 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         return view('room.edit', [
-            'title' => 'Edit Room',
+            'title' => 'Edit Kamar',
             'room' => $room,
             'properties' => Property::all(),
         ]);

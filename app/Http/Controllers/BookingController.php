@@ -16,7 +16,7 @@ class BookingController extends Controller
     public function index()
     {
         return view('booking.index', [
-            'title' => 'Booking',
+            'title' => 'Penyewaan',
             'bookings' => Booking::with(['user', 'room.property'])->latest()->get(),
         ]);
     }
@@ -27,7 +27,7 @@ class BookingController extends Controller
     public function create()
     {
         return view('booking.create', [
-            'title' => 'Create Booking',
+            'title' => 'Tambah Penyewaan',
             'users' => User::where('role', 'Tenant')->get(),
             'rooms' => Room::with('property')->where('status', 'Available')->get(),
         ]);
@@ -80,7 +80,7 @@ class BookingController extends Controller
     public function show(Booking $booking)
     {
         return view('booking.show', [
-            'title' => 'Detail Booking',
+            'title' => 'Detail Penyewaan',
             'booking' => $booking->load(['user', 'room.property']),
         ]);
     }
@@ -91,7 +91,7 @@ class BookingController extends Controller
     public function edit(Booking $booking)
     {
         return view('booking.edit', [
-            'title' => 'Edit Booking',
+            'title' => 'Edit Penyewaan',
             'booking' => $booking,
             'users' => User::where('role', 'Tenant')->get(),
             'rooms' => Room::with('property')->get(),

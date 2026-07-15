@@ -17,7 +17,7 @@ class GalleryController extends Controller
     public function index()
     {
         return view('gallery.index', [
-            'title' => 'Gallery',
+            'title' => 'Galeri',
             'galleries' => Gallery::with(['property', 'room'])->latest()->get(),
         ]);
     }
@@ -28,7 +28,7 @@ class GalleryController extends Controller
     public function create()
     {
         return view('gallery.create', [
-            'title' => 'Create Gallery',
+            'title' => 'Tambah Galeri',
             'properties' => Property::all(),
             'rooms' => Room::with('property')->get(),
         ]);
@@ -89,7 +89,7 @@ class GalleryController extends Controller
     public function show(Gallery $gallery)
     {
         return view('gallery.show', [
-            'title' => 'Detail Gallery',
+            'title' => 'Detail Galeri',
             'gallery' => $gallery->load(['property', 'room']),
         ]);
     }
@@ -100,7 +100,7 @@ class GalleryController extends Controller
     public function edit(Gallery $gallery)
     {
         return view('gallery.edit', [
-            'title' => 'Edit Gallery',
+            'title' => 'Edit Galeri',
             'gallery' => $gallery,
             'properties' => Property::all(),
             'rooms' => Room::with('property')->get(),

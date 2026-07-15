@@ -15,7 +15,7 @@ class MaintenanceRequestController extends Controller
     public function index()
     {
         return view('maintenance.index', [
-            'title' => 'Maintenance Request',
+            'title' => 'Pengaduan Perbaikan',
             'maintenances' => MaintenanceRequest::with(['booking.room.property', 'user'])->latest()->get(),
         ]);
     }

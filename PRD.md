@@ -102,7 +102,7 @@ Diagram di bawah ini menggambarkan arsitektur database relasional menggunakan si
 
 ```mermaid
 erDiagram
-    USERS {
+    PENGGUNA {
         bigint id PK
         string name
         string email
@@ -111,7 +111,7 @@ erDiagram
         datetime created_at
     }
     
-    PROPERTIES {
+    PROPERTI {
         bigint id PK
         bigint user_id FK "Owner ID"
         string name
@@ -120,7 +120,7 @@ erDiagram
         datetime created_at
     }
     
-    ROOMS {
+    KAMAR {
         bigint id PK
         bigint property_id FK
         string room_number
@@ -128,21 +128,21 @@ erDiagram
         string status "Available, Occupied"
     }
     
-    FACILITIES {
+    FASILITAS {
         bigint id PK
         bigint property_id FK
         string name
         string icon
     }
     
-    GALLERIES {
+    GALERI {
         bigint id PK
         bigint property_id FK
         bigint room_id FK "nullable"
         string image_path
     }
     
-    EXPENSES {
+    PENGELUARAN {
         bigint id PK
         bigint property_id FK
         string description
@@ -150,7 +150,7 @@ erDiagram
         date expense_date
     }
     
-    BOOKINGS {
+    PENYEWAAN {
         bigint id PK
         bigint user_id FK "Tenant ID"
         bigint room_id FK
@@ -160,7 +160,7 @@ erDiagram
         string status "Pending, Active, Completed"
     }
     
-    PAYMENTS {
+    PEMBAYARAN {
         bigint id PK
         bigint booking_id FK
         decimal amount
@@ -169,7 +169,7 @@ erDiagram
         string status "Pending, Verified"
     }
     
-    REVIEWS {
+    ULASAN {
         bigint id PK
         bigint booking_id FK
         bigint user_id FK
@@ -177,7 +177,7 @@ erDiagram
         text comment
     }
     
-    MAINTENANCE_REQUESTS {
+    PERMINTAAN_PERBAIKAN {
         bigint id PK
         bigint booking_id FK
         bigint user_id FK
@@ -186,22 +186,22 @@ erDiagram
     }
 
     %% Relasi (Relationships)
-    USERS ||--o{ PROPERTIES : "owns"
-    USERS ||--o{ BOOKINGS : "makes"
-    USERS ||--o{ REVIEWS : "writes"
-    USERS ||--o{ MAINTENANCE_REQUESTS : "reports"
+    PENGGUNA ||--o{ PROPERTI : "owns"
+    PENGGUNA ||--o{ PENYEWAAN : "makes"
+    PENGGUNA ||--o{ ULASAN : "writes"
+    PENGGUNA ||--o{ PERMINTAAN_PERBAIKAN : "reports"
     
-    PROPERTIES ||--o{ ROOMS : "contains"
-    PROPERTIES ||--o{ FACILITIES : "has"
-    PROPERTIES ||--o{ GALLERIES : "has photos"
-    PROPERTIES ||--o{ EXPENSES : "incurs"
+    PROPERTI ||--o{ KAMAR : "contains"
+    PROPERTI ||--o{ FASILITAS : "has"
+    PROPERTI ||--o{ GALERI : "has photos"
+    PROPERTI ||--o{ PENGELUARAN : "incurs"
     
-    ROOMS ||--o{ BOOKINGS : "is rented in"
-    ROOMS ||--o{ GALLERIES : "has photos"
+    KAMAR ||--o{ PENYEWAAN : "is rented in"
+    KAMAR ||--o{ GALERI : "has photos"
     
-    BOOKINGS ||--o{ PAYMENTS : "has"
-    BOOKINGS ||--o| REVIEWS : "receives"
-    BOOKINGS ||--o{ MAINTENANCE_REQUESTS : "generates"
+    PENYEWAAN ||--o{ PEMBAYARAN : "has"
+    PENYEWAAN ||--o| ULASAN : "receives"
+    PENYEWAAN ||--o{ PERMINTAAN_PERBAIKAN : "generates"
 ```
 
 ---

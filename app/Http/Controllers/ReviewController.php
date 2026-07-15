@@ -15,7 +15,7 @@ class ReviewController extends Controller
     public function index()
     {
         return view('review.index', [
-            'title' => 'Review',
+            'title' => 'Ulasan',
             'reviews' => Review::with(['booking.room.property', 'user'])->latest()->get(),
         ]);
     }
@@ -26,7 +26,7 @@ class ReviewController extends Controller
     public function create()
     {
         return view('review.create', [
-            'title' => 'Create Review',
+            'title' => 'Tambah Ulasan',
             // Only show completed bookings that don't have a review yet
             'bookings' => Booking::where('status', 'Completed')->doesntHave('review')->with('user')->get(),
         ]);
@@ -82,7 +82,7 @@ class ReviewController extends Controller
     public function show(Review $review)
     {
         return view('review.show', [
-            'title' => 'Detail Review',
+            'title' => 'Detail Ulasan',
             'review' => $review->load(['booking.room.property', 'user']),
         ]);
     }
@@ -93,7 +93,7 @@ class ReviewController extends Controller
     public function edit(Review $review)
     {
         return view('review.edit', [
-            'title' => 'Edit Review',
+            'title' => 'Edit Ulasan',
             'review' => $review,
             // Include current booking and any completed bookings without reviews
             'bookings' => Booking::where('id', $review->booking_id)

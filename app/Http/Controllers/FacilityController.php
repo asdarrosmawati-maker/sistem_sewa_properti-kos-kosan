@@ -15,7 +15,7 @@ class FacilityController extends Controller
     public function index()
     {
         return view('facility.index', [
-            'title' => 'Facility',
+            'title' => 'Fasilitas',
             'facilities' => Facility::with('property')->latest()->get(),
         ]);
     }
@@ -26,7 +26,7 @@ class FacilityController extends Controller
     public function create()
     {
         return view('facility.create', [
-            'title' => 'Create Facility',
+            'title' => 'Tambah Fasilitas',
             'properties' => Property::all(),
         ]);
     }
@@ -66,7 +66,7 @@ class FacilityController extends Controller
     public function show(Facility $facility)
     {
         return view('facility.show', [
-            'title' => 'Detail Facility',
+            'title' => 'Detail Fasilitas',
             'facility' => $facility->load('property'),
         ]);
     }
@@ -77,7 +77,7 @@ class FacilityController extends Controller
     public function edit(Facility $facility)
     {
         return view('facility.edit', [
-            'title' => 'Edit Facility',
+            'title' => 'Edit Fasilitas',
             'facility' => $facility,
             'properties' => Property::all(),
         ]);
